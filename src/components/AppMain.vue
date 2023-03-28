@@ -25,12 +25,12 @@ export default {
 
     <!-- contenitore della scritta iniziale al caricamento della pagina -->
     <!-- con appunto il controllo che le carte siano 0 -->
-    <div v-if="store.cards.length == 0" class="text">
+    <div v-if="store.numeroCarte == null" class="text">
         ^^^ scegli la quantità di carte qui sopra ^^^
     </div>
 
     <!-- ulteriore controllo che visualizza il loader mentre si aspetta la nuova generazione di carte -->
-    <div v-else-if=" store.cards.length != store.numeroCarte" class="text">
+    <div v-else-if="store.cards.length != store.numeroCarte" class="text">
         loading.....
     </div>
     

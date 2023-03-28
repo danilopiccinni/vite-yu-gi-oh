@@ -4,6 +4,6 @@ export const store = reactive({
 
     cards : [],
 
-    numeroCarte: 0,
+    numeroCarte: null,
 
 })
