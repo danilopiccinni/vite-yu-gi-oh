@@ -38,7 +38,7 @@ export default {
     <div v-else-if="store.cards.length == store.numeroCarte" class="container-cards">
 
         <!-- ciclo v-for per la visualizazzione delle carte richieste -->
-        <AppCard v-for="card in store.cards" :card="card" :card2="card"></AppCard>
+        <AppCard v-for="card in store.cards" :card="card"></AppCard>
 
     </div>
 

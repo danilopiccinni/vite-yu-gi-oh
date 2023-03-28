@@ -1,12 +1,9 @@
 <script>
-import { store } from '../store';
-
 
 
 export default {
     data() { 
         return {
-            store,
 
             textButton:'Compra',
 
@@ -44,6 +41,8 @@ export default {
             <!-- bottone compra e rimuovi dal carrello -->
             <button @click="aggiungiAlCarrello()" class="bottone-compra" :class="textButton == 'Aggiunto (Rimuovi)' ? 'yellow' : 'blue'">{{ textButton }} </button>
             <button @click="showInfo == false ? showInfo=true : showInfo = false" class="bottone-info">Info</button>
+
+
 
             <div v-show="showInfo" class="container-info">
                 <div v-show="card.name">
@@ -172,7 +171,7 @@ export default {
 
 
                 color: white;
-                background-color: rgba(0, 0, 0, 0.907);
+                background-color: rgba(128, 128, 128, 0.863);
             }
         }
         .info-card {
