@@ -49,5 +49,8 @@ export default {
         display: flex;
         flex-wrap: wrap;
         gap: 20px;
+
+        max-width: 80%;
+        margin: 50px auto;
     }
 </style>
