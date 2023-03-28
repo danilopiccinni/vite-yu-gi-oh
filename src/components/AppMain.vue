@@ -21,6 +21,7 @@ export default {
         axios.get('https://db.ygoprodeck.com/api/v7/cardinfo.php?num=50&offset=0').then((res) => {
 
             this.store.cards = res.data.data
+
             
         })
     }
@@ -28,11 +29,16 @@ export default {
 </script>
 
 <template>
+    
 
-    <div class="container-cards">
+    <div v-if="store.cards.length == 50" class="container-cards">
 
         <AppCard v-for="card in store.cards" :card="card"></AppCard>
 
+    </div>
+
+    <div v-else>
+        loading.....
     </div>
 
 </template>
