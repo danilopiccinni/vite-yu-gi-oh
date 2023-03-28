@@ -1,13 +1,21 @@
 <script>
 import { store } from '../store';
 
+
+
 export default {
     data() { 
         return {
             store,
 
-            textButton:'Compra'
+            textButton:'Compra',
+
+            showInfo : false,
         }
+    },
+
+    components : {
+       
     },
 
     props : {
@@ -17,7 +25,7 @@ export default {
     methods : {
         aggiungiAlCarrello() {
            if (this.textButton== 'Compra') {
-            this.textButton = 'Aggiunto al carrello (Rimuovi)'
+            this.textButton = 'Aggiunto (Rimuovi)'
            }  else {
             this.textButton = 'Compra'
            }
@@ -32,9 +40,51 @@ export default {
         <!-- contenitore dell'immagine  -->
         <div class="container-image-card">
             <!-- immagine della card da visualizzare interpolata tramite vue (:src) -->
-            <img class="image-card" :src="card.card_images[0].image_url" alt="'image-card' + {{ card.name }}">
+            <img class="image-card" v-on:mouseleave="showInfo=false" :class="textButton == 'Aggiunto (Rimuovi)' ? 'border-yellow' : 'border-none'" :src="card.card_images[0].image_url" alt="'image-card' + {{ card.name }}">
             <!-- bottone compra e rimuovi dal carrello -->
-            <button @click="aggiungiAlCarrello()" class="bottone-compra" :class="textButton == 'Aggiunto al carrello (Rimuovi)' ? 'yellow' : 'blue'">{{ textButton }} </button>
+            <button @click="aggiungiAlCarrello()" class="bottone-compra" :class="textButton == 'Aggiunto (Rimuovi)' ? 'yellow' : 'blue'">{{ textButton }} </button>
+            <button @click="showInfo == false ? showInfo=true : showInfo = false" class="bottone-info">Info</button>
+
+            <div v-show="showInfo" class="container-info">
+                <div v-show="card.name">
+                    <em class="id-info">Name:</em> <strong class="value name"> {{card.name}}</strong>                
+                </div>
+                <div v-show="card.type">
+                    <em class="id-info">Type:</em> <strong class="value type"> {{card.type}}</strong>
+                </div>
+                <div v-show="card.race">
+                    <em class="id-info">Race:</em> <strong class="value race"> {{card.race}}</strong>                
+                </div>
+                <div v-show="card.frameType">
+                    <em class="id-info">Frame type:</em> <strong class="value race"> {{card.frameType}}</strong>                
+                </div>
+                <div v-show="card.atk">
+                    <em class="id-info">Atk:</em> <strong class="value race"> {{card.atk}}</strong>                
+                </div>
+                <div v-show="card.def">
+                    <em class="id-info">Def:</em> <strong class="value race"> {{card.def}}</strong>                
+                </div>
+                <div v-show="card.level">
+                    <em class="id-info">Level:</em> <strong class="value race"> {{card.level}}</strong>                
+                </div>
+                <div v-show="card.archetype">
+                    <em class="id-info">Archetype:</em> <strong class="value race"> {{card.archetype}}</strong>                
+                </div>
+                <div v-show="card.attribute">
+                    <em class="id-info">Attribute:</em> <strong class="value race"> {{card.attribute}}</strong>                
+                </div>
+                <div v-show="card.card_sets">
+                    <hr>
+                    <hr>
+                    <div>
+                        <em class="id-info">Sets:</em> 
+                    </div>
+                    <div>
+                        <p v-for="set in card.card_sets" class="value race"> -{{set.set_name}} </p>               
+                    </div>
+                </div>
+            </div>
+
         </div>
 
         <!-- contenitore delle info della card -->
@@ -47,12 +97,12 @@ export default {
             <!-- contenitore dedicato al tipo di carta -->
             <div class="container-type-card">
                 <!-- qui visualizziamo il tipo di carta tramite 'baffi' vue -->
-                <em class="id-info">Type:</em> <strong class="value type"> {{card.type}}</strong>
+                <em class="id-info">ID card:</em> <strong class="value type"> {{card.id}}</strong>
             </div>
             <!-- contenitore dedicato alla 'race' della carta -->
             <div class="container-race-card">
                 <!-- qui visualizziamo la race della carta tramite 'baffi' vue -->
-                <em class="id-info">Race:</em> <strong class="value race"> {{card.race}}</strong>
+                <em class="id-info">Price:</em> <strong class="value race"> {{card.card_prices[0].ebay_price}} $</strong>
             </div>
         </div>
     </div>
@@ -78,22 +128,51 @@ export default {
         }
 
 
-
         .container-image-card {
             position: relative;
             
             img {
                 width: 100%;
+                transition: 0.1s;
             }
 
             .bottone-compra {
                 position: absolute;
-                top: -20px;
-                right: 0;
+                top: -21px;
+                right: -1px;
                 
                 display: none;
 
-                border-radius: 12px;
+                border-top-left-radius: 12px;
+            }
+
+            .bottone-info {
+                position: absolute;
+                top : -21px;
+                left : 0px;
+
+                border-top-right-radius: 12px;
+                
+                display: none;
+
+                background-color: white;
+                color: black;
+            }
+
+            .container-info {
+                position: absolute;
+                top: 0;
+                left: 0;
+
+                padding: 15px 20px;
+                border-bottom-right-radius: 12px;
+
+                font-size: 10px;
+
+
+
+                color: white;
+                background-color: rgba(0, 0, 0, 0.907);
             }
         }
         .info-card {
@@ -107,8 +186,13 @@ export default {
         }  
     }
 
-    .card:hover .bottone-compra{
+    .card:hover .bottone-compra,
+    .card:hover .bottone-info{
             display: block;
+        }
+
+        .card:not(:hover) .container-info {
+            display: none;
         }
 
     .yellow {
@@ -119,6 +203,16 @@ export default {
     .blue {
         background-color: rgba(0, 0, 255, 0.799);
         color: white;
+    }
+
+    .border-yellow {
+        box-sizing: border-box;
+        border: 3px solid yellow;
+    }
+
+    .border-none {
+        box-sizing: border-box;
+        border: 0px solid yellow;
     }
 
 
