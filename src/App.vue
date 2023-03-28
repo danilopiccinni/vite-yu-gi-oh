@@ -1,10 +1,10 @@
 <script>
-
+import AppMain from "./components/AppMain.vue"
 
 export default {
   
     components: {
-      
+      AppMain,
     }
   
 }
@@ -12,7 +12,7 @@ export default {
 
 <template>
 
-
+<AppMain></AppMain>
 
 </template>
 
