@@ -9,10 +9,11 @@
 </script>
 
 <template>
-
-    <div class="header">
+    <!-- header -->
+    <header class="header">
+        <!-- immagine che si deve visualizzare -->
         <img src="/img/yu-gi-oh.jpg" alt="">
-    </div>
+    </header>
 
 </template>
 
@@ -20,15 +21,10 @@
 
     .header {
 
-
-
         img {
-
             width: 100%;
             object-fit: cover;
             object-position: top;
-   
-
         }
 
     }

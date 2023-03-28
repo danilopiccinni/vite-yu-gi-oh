@@ -1,4 +1,5 @@
 <script>
+
 import {store} from "../store.js"
 
 import axios from "axios"
@@ -29,11 +30,13 @@ export default {
     },
 
     methods : {
-
+        // metodo/funzione che viene richiamata al click del pulsante di scelta 
         creaMazzo(num) {
 
+        // tramite axios facciamo una richiesta API che ci restituisce un oggetto contenente il numero di carte richieste
         axios.get('https://db.ygoprodeck.com/api/v7/cardinfo.php?num='+num+'&offset=0').then((res) => {
 
+            // assegnamo l'oggetto ricevuto tramite chiamata api 'store' che si trova nel 'store.js'
             this.store.cards = res.data.data
 
             
@@ -45,8 +48,8 @@ export default {
 </script>
 
 <template>
+    <!-- contenitore dei vari bottoni per la scelta della quantità delle carte -->
     <div class="container-buttons">
-
         <button @click="numeroCarte=10 , creaMazzo(numeroCarte)">10 carte</button>
         <button @click="numeroCarte=15 , creaMazzo(numeroCarte)">15 carte</button>
         <button @click="numeroCarte=20 , creaMazzo(numeroCarte)">20 carte</button>
@@ -68,17 +71,21 @@ export default {
         <button @click="numeroCarte=100 , creaMazzo(numeroCarte)">100 carte</button>
     </div>
 
-
+    <!-- contenitore della scritta iniziale al caricamento della pagina -->
+    <!-- con appunto il controllo che le carte siano 0 -->
     <div v-if="store.cards.length == 0" class="text">
         ^^^ scegli la quantità di carte qui sopra ^^^
     </div>
 
+    <!-- ulteriore controllo che visualizza il loader mentre si aspetta la nuova generazione di carte -->
     <div v-else-if=" store.cards.length != numeroCarte" class="text">
         loading.....
     </div>
     
+    <!-- ulteriore controllo che al raggiungimento delle carte richieste, quest'ultime vengono visualizzate -->
     <div v-else-if="store.cards.length == numeroCarte" class="container-cards">
 
+        <!-- ciclo v-for per la visualizazzione delle carte richieste -->
         <AppCard v-for="card in store.cards" :card="card"></AppCard>
 
     </div>
