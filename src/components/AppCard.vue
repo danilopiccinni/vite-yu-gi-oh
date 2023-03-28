@@ -16,7 +16,7 @@ export default {
 
 <template>
 
-    <div class="card">
+    <div class="card car">
 
         <div class="container-image-card">
             <img class="image-card" :src="card.card_images[0].image_url" alt="'image-card' + {{ card.name }}">
@@ -41,6 +41,8 @@ export default {
 
 
     .card {
+        transition: 1s;
+
         width: calc(100% / 5 - 20px / 5 * 4);
 
         display: flex;
@@ -50,13 +52,29 @@ export default {
             width: 100%;
         }
 
-        .id-info {
-            font-size: 10px;
-        }
+        .info-card {
+        padding: 5px;
 
-        .value {
-            font-size: 15px;
+            .id-info {
+                font-size: 10px;
+            }
+
+            .value {
+                font-size: 13px;
+            }
+
         }
+        
+    }
+
+
+
+    .card:hover {
+        border-radius: 12px;
+        background-color: rgb(0, 0, 0);
+        scale: 150%;
+        z-index: 1;
+
     }
 
 </style>
