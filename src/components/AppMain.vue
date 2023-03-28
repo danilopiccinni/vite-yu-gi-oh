@@ -30,8 +30,9 @@ export default {
     </div>
 
     <!-- ulteriore controllo che visualizza il loader mentre si aspetta la nuova generazione di carte -->
-    <div v-else-if="store.cards.length != store.numeroCarte" class="text">
-        loading.....
+    <div v-else-if="store.cards.length != store.numeroCarte" class="text loader">
+        <div class="spinner"></div>
+        <span>loading.....</span>
     </div>
     
     <!-- ulteriore controllo che al raggiungimento delle carte richieste, quest'ultime vengono visualizzate -->
@@ -62,5 +63,33 @@ export default {
         font-weight: bold;
         padding-top: 20px;
         text-align: center;
+    }
+
+    .loader {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 10px;
+        color: #3498db;
+    }
+    .spinner {
+
+        border : 16px solid #f3f3f3;
+        border-top: 16px solid #3498db;
+
+        border-radius: 50%;
+        width: 20px;
+        height: 20px;
+        animation: spin 2s linear infinite;
+    }
+
+    @keyframes spin {
+        0% {
+            transform: rotate(0deg);
+        }
+
+        100% {
+            transform : rotate(360deg)
+        }
     }
 </style>
