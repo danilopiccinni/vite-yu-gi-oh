@@ -6,4 +6,6 @@ export const store = reactive({
 
     numeroCarte: null,
 
+    nomeSearch : '',
+
 })

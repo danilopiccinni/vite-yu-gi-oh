@@ -1,4 +1,6 @@
 <script>
+
+
 import axios from "axios"
 
 import {store} from "../store.js"
@@ -11,18 +13,39 @@ import {store} from "../store.js"
             }
         },
 
+
+
         methods : {
             // metodo/funzione che viene richiamata al click del pulsante di scelta 
             creaMazzo(num) {
                 
+                this.store.nomeSearch = ''
                 // tramite axios facciamo una richiesta API che ci restituisce un oggetto contenente il numero di carte richieste
                 axios.get('https://db.ygoprodeck.com/api/v7/cardinfo.php?num='+num+'&offset=0').then((res) => {
                     
                     // assegnamo l'oggetto ricevuto tramite chiamata api 'store' che si trova nel 'store.js'
                     this.store.cards = res.data.data
                 })
+            },
+
+            eseguiRicerca() {
+
+                if (this.store.nomeSearch != '') {
+                    
+                    axios.get('https://db.ygoprodeck.com/api/v7/cardinfo.php?fname='+this.store.nomeSearch).then((res) => {
+                                        
+                        // assegnamo l'oggetto ricevuto tramite chiamata api 'store' che si trova nel 'store.js'
+                        this.store.cards = res.data.data
+                        this.store.numeroCarte = this.store.cards.length
+                    }).catch((err) => {
+                        alert('nessuna corrrispondenza')
+                    })
+
+                }
             }
-        },
+
+
+        }
     }
                
 </script>
@@ -51,6 +74,19 @@ import {store} from "../store.js"
         <button @click="store.numeroCarte=100 , creaMazzo(store.numeroCarte)">100 carte</button>
     </div>
 
+
+
+    <div class="container-ricerca">
+
+        <span v-if="store.cards.length > 0"> trovati : {{ store.cards.length }} card </span>
+        <span>filtra per nome</span>
+        <input v-model="store.nomeSearch" type="text" placeholder="inserisci qui il nome" required>
+        <button @click="eseguiRicerca()" >cerca</button>
+
+    </div>
+
+
+
 </template>
 
 <style scoped lang="scss">
@@ -62,6 +98,18 @@ import {store} from "../store.js"
         gap: 5px;
 
         padding-top: 50px;
+    }
+
+    .container-ricerca {
+        display: flex;
+        justify-content: center;
+        gap: 15px;
+
+        padding-top: 25px;
+
+        input {
+            width: 250px;
+        }
     }
 
 </style>
