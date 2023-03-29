@@ -50,10 +50,10 @@ import {store} from "../store.js"
                         // assegnamo l'oggetto ricevuto tramite chiamata api 'store' che si trova nel 'store.js'
                         this.store.cards = res.data.data
                         this.store.numeroCarte = this.store.cards.length
-                        
+
                         this.store.isLoading = false
                     }).catch((err) => {
-                        alert(err.response.data)
+                        alert('nessuna corrispondeza')
                     })
 
 

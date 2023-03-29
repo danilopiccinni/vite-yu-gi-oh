@@ -1,5 +1,5 @@
 <script>
-import AppButtonsNumbCard from "./AppSearch.vue";
+import AppSearch from "./AppSearch.vue";
 
 import {store} from "../store.js"
 
@@ -14,27 +14,21 @@ export default {
 
     components : {
         AppCard,
-        AppButtonsNumbCard
+        AppSearch,
     },
 }
 </script>
 
 <template>
-
-    <AppButtonsNumbCard></AppButtonsNumbCard>
-
-    <!-- contenitore della scritta iniziale al caricamento della pagina -->
-    <!-- con appunto il controllo che le carte siano 0 -->
-    <div v-if="store.numeroCarte == null" class="text">
-        ^^^ scegli la quantità di carte qui sopra ^^^
-    </div>
-
     <!-- ulteriore controllo che visualizza il loader mentre si aspetta la nuova generazione di carte -->
     <div v-if="store.isLoading" class="text loader">
         <div class="spinner"></div>
         <span>loading.....</span>
     </div>
+
+    <AppSearch></AppSearch>
     
+
     <!-- ulteriore controllo che al raggiungimento delle carte richieste, quest'ultime vengono visualizzate -->
     <div v-if="store.isLoading == false " class="container-cards">
 
