@@ -8,6 +8,7 @@ export default {
             textButton:'Compra',
 
             showInfo : false,
+
         }
     },
 
@@ -41,9 +42,7 @@ export default {
             <!-- bottone compra e rimuovi dal carrello -->
             <button @click="aggiungiAlCarrello()" class="bottone-compra" :class="textButton == 'Aggiunto (Rimuovi)' ? 'yellow' : 'blue'">{{ textButton }} </button>
             <button @click="showInfo == false ? showInfo=true : showInfo = false" class="bottone-info">Info</button>
-
-
-
+            
             <div v-show="showInfo" class="container-info">
                 <div v-show="card.name">
                     <em class="id-info">Name:</em> <strong class="value name"> {{card.name}}</strong>                
@@ -83,11 +82,10 @@ export default {
                     </div>
                 </div>
             </div>
-
         </div>
-
-        <!-- contenitore delle info della card -->
+            
         <div class="info-card">
+            <!-- contenitore delle info della card -->
             <!-- contenitore dedicato al nome della carta -->
             <div class="contanier-name-card">
                 <!-- qui visualizziamo il nome tramite 'baffi' vue  -->
@@ -105,34 +103,31 @@ export default {
             </div>
         </div>
     </div>
-
 </template>
-
+            
 <style scoped lang="scss">
-
-
     .card {
         display: flex;
         flex-direction: column;
         
         width: calc(100% / 5 - 20px / 5 * 4);
         
-        transition: 1s;
+        transition: 2s;
 
-        &:hover {
+        position: relative;
+
+        &:hover{
             border-radius: 12px;
             background-color: rgb(0, 0, 0);
             scale: 150%;
-            z-index: 1;
+            z-index: 2;
         }
-
-
         .container-image-card {
             position: relative;
             
             img {
                 width: 100%;
-                transition: 0.1s;
+                transition: 0.050s;
             }
 
             .bottone-compra {
@@ -171,7 +166,7 @@ export default {
 
 
                 color: white;
-                background-color: rgba(128, 128, 128, 0.863);
+                background-color: rgba(103, 103, 103, 0.863);
             }
         }
         .info-card {
@@ -187,16 +182,17 @@ export default {
 
     .card:hover .bottone-compra,
     .card:hover .bottone-info{
-            display: block;
-        }
-
-        .card:not(:hover) .container-info {
-            display: none;
-        }
+        display: block;
+    }
+            
+    .card:not(:hover) .container-info {
+        display: none;
+    }
 
     .yellow {
         background-color: rgba(255, 255, 0, 0.835);
         color: red;
+
     }
 
     .blue {
