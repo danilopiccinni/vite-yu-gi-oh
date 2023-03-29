@@ -1,5 +1,5 @@
 <script>
-
+import AppNameSearch from './AppNameSearch.vue'
 
 import axios from "axios"
 
@@ -11,6 +11,10 @@ import {store} from "../store.js"
             return {
                 store,
             }
+        },
+
+        components : {
+            AppNameSearch,
         },
 
 
@@ -74,16 +78,16 @@ import {store} from "../store.js"
         <button @click="store.numeroCarte=100 , creaMazzo(store.numeroCarte)">100 carte</button>
     </div>
 
+    <AppNameSearch @eseguiRicerca="eseguiRicerca()"></AppNameSearch>
 
-
-    <div class="container-ricerca">
+    <!-- <div class="container-ricerca">
 
         <span v-if="store.cards.length > 0"> trovati : {{ store.cards.length }} card </span>
         <span>filtra per nome</span>
         <input v-model="store.nomeSearch" type="text" placeholder="inserisci qui il nome" required>
         <button @click="eseguiRicerca()" >cerca</button>
 
-    </div>
+    </div> -->
 
 
 
