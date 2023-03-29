@@ -33,6 +33,7 @@ export default {
 </script>
 
 <template>
+
     <!-- contenitore dell'intera card -->
     <div class="card">
         <!-- contenitore dell'immagine  -->
@@ -106,13 +107,15 @@ export default {
 </template>
             
 <style scoped lang="scss">
+
+
     .card {
         display: flex;
         flex-direction: column;
         
         width: calc(100% / 5 - 20px / 5 * 4);
         
-        transition: 2s;
+        transition: 0.5s;
 
         position: relative;
 
@@ -120,7 +123,7 @@ export default {
             border-radius: 12px;
             background-color: rgb(0, 0, 0);
             scale: 150%;
-            z-index: 2;
+            z-index: 1;
         }
         .container-image-card {
             position: relative;
@@ -162,8 +165,6 @@ export default {
                 border-bottom-right-radius: 12px;
 
                 font-size: 10px;
-
-
 
                 color: white;
                 background-color: rgba(103, 103, 103, 0.863);
