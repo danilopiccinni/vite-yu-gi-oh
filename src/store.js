@@ -8,4 +8,6 @@ export const store = reactive({
 
     nomeSearch : '',
 
+    isLoading: false,
+
 })

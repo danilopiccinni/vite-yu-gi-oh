@@ -1,5 +1,5 @@
 <script>
-import AppButtonsNumbCard from "./AppButtonsNumbCard.vue";
+import AppButtonsNumbCard from "./AppSearch.vue";
 
 import {store} from "../store.js"
 
@@ -30,13 +30,13 @@ export default {
     </div>
 
     <!-- ulteriore controllo che visualizza il loader mentre si aspetta la nuova generazione di carte -->
-    <div v-else-if="store.cards.length != store.numeroCarte" class="text loader">
+    <div v-if="store.isLoading" class="text loader">
         <div class="spinner"></div>
         <span>loading.....</span>
     </div>
     
     <!-- ulteriore controllo che al raggiungimento delle carte richieste, quest'ultime vengono visualizzate -->
-    <div v-else-if="store.cards.length == store.numeroCarte" class="container-cards">
+    <div v-if="store.isLoading == false " class="container-cards">
 
         <!-- ciclo v-for per la visualizazzione delle carte richieste -->
         <AppCard v-for="card in store.cards" :card="card"></AppCard>
